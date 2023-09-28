@@ -26,6 +26,7 @@ import com.example.duanmau_ph44245.fragment.LoaiSachFragment;
 import com.example.duanmau_ph44245.fragment.PhieuMuonFragment;
 import com.example.duanmau_ph44245.fragment.SachFragment;
 import com.example.duanmau_ph44245.fragment.ThanhVienFragment;
+import com.example.duanmau_ph44245.fragment.ThuThuFragment;
 import com.example.duanmau_ph44245.fragment.TopFragment;
 import com.example.duanmau_ph44245.model.ThuThu;
 import com.google.android.material.appbar.MaterialToolbar;
@@ -138,9 +139,10 @@ public class MainActivity extends AppCompatActivity {
                             .replace(R.id.fragment_container, doanhThuFragment).commit();
                 } else if (itemId == R.id.nav_them_nguoi_dung) {
                     setTitle("Thêm người dùng");
-                    AddUserFragment addUserFragment = new AddUserFragment();
+                    ThuThuFragment thuThuFragment  = new ThuThuFragment();
+//                    AddUserFragment addUserFragment = new AddUserFragment();
                     fragmentManager.beginTransaction()
-                            .replace(R.id.fragment_container, addUserFragment).commit();
+                           /* .replace(R.id.fragment_container, addUserFragment).commit();*/.replace(R.id.fragment_container, thuThuFragment).commit();
                 } else if (itemId == R.id.nav_doi_mat_khau) {
                     setTitle("Đổi mật khẩu");
                     ChangePassFragment changePassFragment = new ChangePassFragment();
