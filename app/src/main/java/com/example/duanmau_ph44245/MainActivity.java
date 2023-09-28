@@ -19,15 +19,14 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.FragmentManager;
 
 import com.example.duanmau_ph44245.dao.ThuThuDAO;
-import com.example.duanmau_ph44245.fragment.AddUserFragment;
-import com.example.duanmau_ph44245.fragment.ChangePassFragment;
-import com.example.duanmau_ph44245.fragment.DoanhThuFragment;
-import com.example.duanmau_ph44245.fragment.LoaiSachFragment;
-import com.example.duanmau_ph44245.fragment.PhieuMuonFragment;
-import com.example.duanmau_ph44245.fragment.SachFragment;
-import com.example.duanmau_ph44245.fragment.ThanhVienFragment;
-import com.example.duanmau_ph44245.fragment.ThuThuFragment;
-import com.example.duanmau_ph44245.fragment.TopFragment;
+import com.example.duanmau_ph44245.fragment.Fragment_ChangePass;
+import com.example.duanmau_ph44245.fragment.Fragment_DoanhThu;
+import com.example.duanmau_ph44245.fragment.Fragment_LoaiSach;
+import com.example.duanmau_ph44245.fragment.Fragment_PhieuMuon;
+import com.example.duanmau_ph44245.fragment.Fragment_Sach;
+import com.example.duanmau_ph44245.fragment.Fragment_ThanhVien;
+import com.example.duanmau_ph44245.fragment.Fragment_AddUser;
+import com.example.duanmau_ph44245.fragment.Fragment_Top10;
 import com.example.duanmau_ph44245.model.ThuThu;
 import com.google.android.material.appbar.MaterialToolbar;
 import com.google.android.material.navigation.NavigationView;
@@ -37,14 +36,14 @@ public class MainActivity extends AppCompatActivity {
     DrawerLayout drawerLayout;
     NavigationView navigationView;
     FragmentManager fragmentManager;
-    AddUserFragment addUserFragment;
-    ChangePassFragment changePassFragment;
-    DoanhThuFragment doanhThuFragment;
-    LoaiSachFragment loaiSachFragment;
-    PhieuMuonFragment phieuMuonFragment;
-    SachFragment sachFragment;
-    ThanhVienFragment thanhVienFragment;
-    TopFragment topFragment;
+    Fragment_AddUser fragmentAddUser;
+    Fragment_ChangePass fragmentChangePass;
+    Fragment_DoanhThu fragmentDoanhThu;
+    Fragment_LoaiSach fragmentLoaiSach;
+    Fragment_PhieuMuon fragmentPhieuMuon;
+    Fragment_Sach fragmentSach;
+    Fragment_ThanhVien fragmentThanhVien;
+    Fragment_Top10 fragmentTop10;
 
     View dialogLogOut;
     LayoutInflater layoutInflater;
@@ -89,17 +88,17 @@ public class MainActivity extends AppCompatActivity {
             navigationView.getMenu().findItem(R.id.nav_them_nguoi_dung).setVisible(false);
         }
 
-        addUserFragment = new AddUserFragment();
-        changePassFragment = new ChangePassFragment();
-        doanhThuFragment = new DoanhThuFragment();
-        loaiSachFragment = new LoaiSachFragment();
-        phieuMuonFragment = new PhieuMuonFragment();
-        sachFragment = new SachFragment();
-        thanhVienFragment = new ThanhVienFragment();
-        topFragment = new TopFragment();
+        fragmentAddUser = new Fragment_AddUser();
+        fragmentChangePass = new Fragment_ChangePass();
+        fragmentDoanhThu = new Fragment_DoanhThu();
+        fragmentLoaiSach = new Fragment_LoaiSach();
+        fragmentPhieuMuon = new Fragment_PhieuMuon();
+        fragmentSach = new Fragment_Sach();
+        fragmentThanhVien = new Fragment_ThanhVien();
+        fragmentTop10 = new Fragment_Top10();
 
         fragmentManager = getSupportFragmentManager();
-        fragmentManager.beginTransaction().replace(R.id.fragment_container, phieuMuonFragment).commit();
+        fragmentManager.beginTransaction().replace(R.id.fragment_container, fragmentPhieuMuon).commit();
         //an menu
 //        navigationView.getMenu().findItem(R.id.nav_them_nguoi_dung).setVisible(false);
         navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
@@ -109,45 +108,44 @@ public class MainActivity extends AppCompatActivity {
 
                 if (itemId == R.id.nav_phieu_muon) {
                     setTitle("Quản lý phiếu mượn");
-                    PhieuMuonFragment phieuMuonFragment = new PhieuMuonFragment();
+                    Fragment_PhieuMuon fragmentPhieuMuon = new Fragment_PhieuMuon();
                     fragmentManager.beginTransaction()
-                            .replace(R.id.fragment_container, phieuMuonFragment).commit();
+                            .replace(R.id.fragment_container, fragmentPhieuMuon).commit();
                 } else if (itemId == R.id.nav_loai_sach) {
                     setTitle("Quản lý loại sách");
-                    LoaiSachFragment loaiSachFragment = new LoaiSachFragment();
+                    Fragment_LoaiSach fragmentLoaiSach = new Fragment_LoaiSach();
                     fragmentManager.beginTransaction()
-                            .replace(R.id.fragment_container, loaiSachFragment).commit();
+                            .replace(R.id.fragment_container, fragmentLoaiSach).commit();
                 } else if (itemId == R.id.nav_sach) {
                     setTitle("Quản lý sách");
-                    SachFragment sachFragment = new SachFragment();
+                    Fragment_Sach fragmentSach = new Fragment_Sach();
                     fragmentManager.beginTransaction()
-                            .replace(R.id.fragment_container, sachFragment).commit();
+                            .replace(R.id.fragment_container, fragmentSach).commit();
                 } else if (itemId == R.id.nav_thanh_vien) {
                     setTitle("Quản lý thành viên");
-                    ThanhVienFragment thanhVienFragment = new ThanhVienFragment();
+                    Fragment_ThanhVien fragmentThanhVien = new Fragment_ThanhVien();
                     fragmentManager.beginTransaction()
-                            .replace(R.id.fragment_container, thanhVienFragment).commit();
+                            .replace(R.id.fragment_container, fragmentThanhVien).commit();
                 } else if (itemId == R.id.nav_top) {
                     setTitle("10 sách mượn nhiều nhất");
-                    TopFragment topFragment = new TopFragment();
+                    Fragment_Top10 fragmentTop10 = new Fragment_Top10();
                     fragmentManager.beginTransaction()
-                            .replace(R.id.fragment_container, topFragment).commit();
+                            .replace(R.id.fragment_container, fragmentTop10).commit();
                 } else if (itemId == R.id.nav_doanh_thu) {
                     setTitle("Doanh thu");
-                    DoanhThuFragment doanhThuFragment = new DoanhThuFragment();
+                    Fragment_DoanhThu fragmentDoanhThu = new Fragment_DoanhThu();
                     fragmentManager.beginTransaction()
-                            .replace(R.id.fragment_container, doanhThuFragment).commit();
+                            .replace(R.id.fragment_container, fragmentDoanhThu).commit();
                 } else if (itemId == R.id.nav_them_nguoi_dung) {
                     setTitle("Thêm người dùng");
-                    ThuThuFragment thuThuFragment  = new ThuThuFragment();
-//                    AddUserFragment addUserFragment = new AddUserFragment();
+                    Fragment_AddUser fragmentAddUser = new Fragment_AddUser();
                     fragmentManager.beginTransaction()
-                           /* .replace(R.id.fragment_container, addUserFragment).commit();*/.replace(R.id.fragment_container, thuThuFragment).commit();
+                           .replace(R.id.fragment_container, fragmentAddUser).commit();
                 } else if (itemId == R.id.nav_doi_mat_khau) {
                     setTitle("Đổi mật khẩu");
-                    ChangePassFragment changePassFragment = new ChangePassFragment();
+                    Fragment_ChangePass fragmentChangePass = new Fragment_ChangePass();
                     fragmentManager.beginTransaction()
-                            .replace(R.id.fragment_container, changePassFragment).commit();
+                            .replace(R.id.fragment_container, fragmentChangePass).commit();
                 } else if (itemId == R.id.nav_dang_xuat) {
                     if (dialogLogOut.getParent() != null) {
                         ((ViewGroup) dialogLogOut.getParent()).removeAllViews();

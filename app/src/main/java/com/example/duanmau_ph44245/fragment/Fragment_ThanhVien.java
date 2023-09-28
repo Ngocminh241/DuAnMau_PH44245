@@ -29,7 +29,7 @@ import com.google.android.material.textfield.TextInputLayout;
 import java.util.ArrayList;
 import java.util.Calendar;
 
-public class ThanhVienFragment extends Fragment {
+public class Fragment_ThanhVien extends Fragment {
     LayoutInflater inflater;
     View viewDialogAddThanhVien;
     FloatingActionButton floatingActionButton;
@@ -39,7 +39,7 @@ public class ThanhVienFragment extends Fragment {
     RecyclerView rcyThanhVien;
     ThanhVienDAO thanhVienDAO;
     ThanhVienAdapter thanhVienAdapter;
-    ThanhVienFragment thanhVienFragment;
+    Fragment_ThanhVien fragmentThanhVien;
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -136,7 +136,7 @@ public class ThanhVienFragment extends Fragment {
                           thanhVienDAO.insertThanhVien(thanhVien);
                           arrThanhVien = new ArrayList<>();
                           arrThanhVien = (ArrayList<ThanhVien>) thanhVienDAO.getAllThanhVien();
-                          thanhVienAdapter = new ThanhVienAdapter(mContext,thanhVienFragment,  arrThanhVien);
+                          thanhVienAdapter = new ThanhVienAdapter(mContext, fragmentThanhVien,  arrThanhVien);
                           rcyThanhVien.setAdapter(thanhVienAdapter);
                           Snackbar.make(view, "Thêm thành viên thành công!", Snackbar.LENGTH_LONG)
                                   .setBackgroundTint(ContextCompat.getColor(getActivity(), R.color.primary_color))

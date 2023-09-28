@@ -38,7 +38,7 @@ import com.google.android.material.textfield.TextInputLayout;
 import java.util.ArrayList;
 import java.util.Calendar;
 
-public class PhieuMuonFragment extends Fragment {
+public class Fragment_PhieuMuon extends Fragment {
     LayoutInflater inflater;
     FloatingActionButton floatingActionButton;
     Context mContext;

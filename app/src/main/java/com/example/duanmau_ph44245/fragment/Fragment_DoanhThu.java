@@ -21,7 +21,7 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 
-public class DoanhThuFragment extends Fragment {
+public class Fragment_DoanhThu extends Fragment {
     Button btn_doanh_thu;
     EditText ed_doanh_thu_tu_ngay, ed_doanh_thu_den_ngay;
     TextView tv_doanh_thu;

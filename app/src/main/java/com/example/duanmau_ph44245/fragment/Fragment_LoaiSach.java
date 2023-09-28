@@ -26,7 +26,7 @@ import com.google.android.material.textfield.TextInputLayout;
 
 import java.util.ArrayList;
 
-public class LoaiSachFragment extends Fragment {
+public class Fragment_LoaiSach extends Fragment {
     LayoutInflater inflater;
     View viewDialogAddLoaiSach;
     FloatingActionButton floatingActionButton;

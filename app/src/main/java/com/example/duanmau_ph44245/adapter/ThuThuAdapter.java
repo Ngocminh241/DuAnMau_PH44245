@@ -2,32 +2,22 @@ package com.example.duanmau_ph44245.adapter;
 
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
-import android.app.DatePickerDialog;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.DatePicker;
-import android.widget.EditText;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.duanmau_ph44245.R;
-import com.example.duanmau_ph44245.dao.PhieuMuonDAO;
-import com.example.duanmau_ph44245.dao.ThanhVienDAO;
 import com.example.duanmau_ph44245.dao.ThuThuDAO;
-import com.example.duanmau_ph44245.fragment.ThanhVienFragment;
-import com.example.duanmau_ph44245.fragment.ThuThuFragment;
-import com.example.duanmau_ph44245.model.PhieuMuon;
-import com.example.duanmau_ph44245.model.ThanhVien;
+import com.example.duanmau_ph44245.fragment.Fragment_AddUser;
 import com.example.duanmau_ph44245.model.ThuThu;
 import com.google.android.material.snackbar.Snackbar;
-import com.google.android.material.textfield.TextInputLayout;
 
 import java.util.ArrayList;
-import java.util.Calendar;
 
 public class ThuThuAdapter extends RecyclerView.Adapter<ThuThuViewHolder> {
     ArrayList<ThuThu> arrThuThu = new ArrayList<>();
@@ -36,14 +26,14 @@ public class ThuThuAdapter extends RecyclerView.Adapter<ThuThuViewHolder> {
 
     LayoutInflater inflater;
     View viewDeleteThuThu, viewUpdateThuThu;
-    ThuThuFragment thuThuFragment;
+    Fragment_AddUser fragmentAddUser;
     View viewAlert;
 
 
-    public ThuThuAdapter(Context context, ThuThuFragment thuThuFragment, ArrayList<ThuThu> arrThuThu) {
+    public ThuThuAdapter(Context context, Fragment_AddUser fragmentAddUser, ArrayList<ThuThu> arrThuThu) {
         this.context = context;
         this.arrThuThu = arrThuThu;
-        this.thuThuFragment = thuThuFragment;
+        this.fragmentAddUser = fragmentAddUser;
     }
 
     @NonNull
@@ -58,7 +48,7 @@ public class ThuThuAdapter extends RecyclerView.Adapter<ThuThuViewHolder> {
 
     @Override
     public void onBindViewHolder(@NonNull ThuThuViewHolder holder, @SuppressLint("RecyclerView") int position) {
-        thuThuFragment = new ThuThuFragment();
+        fragmentAddUser = new Fragment_AddUser();
         thuThuDAO = new ThuThuDAO(context);
         ThuThu thuThu = arrThuThu.get(position);
         holder.tt_id_tt.setText(thuThu.maTT + " ");

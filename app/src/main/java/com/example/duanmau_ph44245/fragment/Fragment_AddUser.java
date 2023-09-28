@@ -1,14 +1,12 @@
 package com.example.duanmau_ph44245.fragment;
 
 import android.app.AlertDialog;
-import android.app.DatePickerDialog;
 import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.TextView;
 
@@ -20,20 +18,16 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.duanmau_ph44245.R;
-import com.example.duanmau_ph44245.adapter.ThanhVienAdapter;
 import com.example.duanmau_ph44245.adapter.ThuThuAdapter;
-import com.example.duanmau_ph44245.dao.ThanhVienDAO;
 import com.example.duanmau_ph44245.dao.ThuThuDAO;
-import com.example.duanmau_ph44245.model.ThanhVien;
 import com.example.duanmau_ph44245.model.ThuThu;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.textfield.TextInputLayout;
 
 import java.util.ArrayList;
-import java.util.Calendar;
 
-public class ThuThuFragment extends Fragment {
+public class Fragment_AddUser extends Fragment {
     ThuThuDAO thuThuDAO;
     Button  btn_add_user;
     EditText ed_username, ed_name, ed_password, ed_repassword;
@@ -47,7 +41,7 @@ public class ThuThuFragment extends Fragment {
     ArrayList<ThuThu> arrThuThu = new ArrayList<>();
     RecyclerView rcyThuThu;
     ThuThuAdapter thuThuAdapter;
-    ThuThuFragment thuThuFragment;
+    Fragment_AddUser fragmentAddUser;
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -108,7 +102,7 @@ public class ThuThuFragment extends Fragment {
                             if(thuThuDAO.insertThuThu(thuThu)> 0) {
                                 arrThuThu = new ArrayList<>();
                                 arrThuThu = (ArrayList<ThuThu>) thuThuDAO.getAllThuThu();
-                                thuThuAdapter = new ThuThuAdapter(mContext,thuThuFragment,  arrThuThu);
+                                thuThuAdapter = new ThuThuAdapter(mContext, fragmentAddUser,  arrThuThu);
                                 rcyThuThu.setAdapter(thuThuAdapter);
                                 Snackbar.make(view, "Thêm thủ thư thành công!", Snackbar.LENGTH_LONG)
                                         .setBackgroundTint(ContextCompat.getColor(getActivity(), R.color.primary_color))

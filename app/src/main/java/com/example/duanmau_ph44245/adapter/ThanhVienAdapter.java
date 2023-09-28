@@ -17,7 +17,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.duanmau_ph44245.R;
 import com.example.duanmau_ph44245.dao.PhieuMuonDAO;
 import com.example.duanmau_ph44245.dao.ThanhVienDAO;
-import com.example.duanmau_ph44245.fragment.ThanhVienFragment;
+import com.example.duanmau_ph44245.fragment.Fragment_ThanhVien;
 import com.example.duanmau_ph44245.model.PhieuMuon;
 import com.example.duanmau_ph44245.model.ThanhVien;
 import com.google.android.material.snackbar.Snackbar;
@@ -36,14 +36,14 @@ public class ThanhVienAdapter extends RecyclerView.Adapter<ThanhVienViewHolder> 
 
     PhieuMuonDAO phieuMuonDAO;
     ArrayList<PhieuMuon> arrPM = new ArrayList<>();
-    ThanhVienFragment thanhVienFragment;
+    Fragment_ThanhVien fragmentThanhVien;
     View viewAlert;
 
 
-    public ThanhVienAdapter(Context context,ThanhVienFragment thanhVienFragment, ArrayList<ThanhVien> arrThanhVien) {
+    public ThanhVienAdapter(Context context, Fragment_ThanhVien fragmentThanhVien, ArrayList<ThanhVien> arrThanhVien) {
         this.context = context;
         this.arrThanhVien = arrThanhVien;
-        this.thanhVienFragment = thanhVienFragment;
+        this.fragmentThanhVien = fragmentThanhVien;
     }
 
     @NonNull
@@ -58,7 +58,7 @@ public class ThanhVienAdapter extends RecyclerView.Adapter<ThanhVienViewHolder> 
 
     @Override
     public void onBindViewHolder(@NonNull ThanhVienViewHolder holder, @SuppressLint("RecyclerView") int position) {
-        thanhVienFragment = new ThanhVienFragment();
+        fragmentThanhVien = new Fragment_ThanhVien();
         thanhVienDAO = new ThanhVienDAO(context);
         ThanhVien thanhVien = arrThanhVien.get(position);
         holder.tv_id_tv.setText(thanhVien.maTV + " ");

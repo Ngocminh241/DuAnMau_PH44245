@@ -19,7 +19,7 @@ import com.example.duanmau_ph44245.model.Top;
 
 import java.util.ArrayList;
 
-public class TopFragment extends Fragment {
+public class Fragment_Top10 extends Fragment {
     LayoutInflater inflater;
     Context mContext;
 

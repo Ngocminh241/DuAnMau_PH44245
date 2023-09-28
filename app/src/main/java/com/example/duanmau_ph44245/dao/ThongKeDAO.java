@@ -1,5 +1,6 @@
 package com.example.duanmau_ph44245.dao;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
@@ -24,6 +25,7 @@ public class ThongKeDAO {
     }
 
     //thong ke top 10
+    @SuppressLint("Range")
     public List<Top> getTop() {
         String sqlTop = "SELECT maSach, count(maSach) as soLuong FROM phieumuon GROUP BY maSach ORDER BY soLuong DESC LIMIT 10";
         List<Top> list = new ArrayList<>();
@@ -31,7 +33,7 @@ public class ThongKeDAO {
         Cursor cursor = sqLiteDatabase.rawQuery(sqlTop, null);
         while (cursor.moveToNext()) {
             Top top = new Top();
-            Sach sach = sachDAO.getIdSach(cursor.getString(cursor.getColumnIndex("maSach")));
+            @SuppressLint("Range") Sach sach = sachDAO.getIdSach(cursor.getString(cursor.getColumnIndex("maSach")));
             top.tenSach = sach.tenSach;
             top.soLuong = Integer.parseInt(cursor.getString(cursor.getColumnIndex("soLuong")));
             list.add(top);
@@ -40,6 +42,7 @@ public class ThongKeDAO {
     }
 
     //thong ke doanh thu
+    @SuppressLint("Range")
     public int getDoanhThu(String tuNgay, String denNgay) {
         String sqlDoanhThu = "SELECT SUM (tienThue) as doanhThu FROM phieumuon WHERE ngay BETWEEN ? AND ?";
         List <Integer> list = new ArrayList<>();

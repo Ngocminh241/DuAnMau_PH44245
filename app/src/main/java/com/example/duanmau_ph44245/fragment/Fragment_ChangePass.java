@@ -21,7 +21,7 @@ import com.example.duanmau_ph44245.model.ThuThu;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.textfield.TextInputLayout;
 
-public class ChangePassFragment extends Fragment {
+public class Fragment_ChangePass extends Fragment {
     EditText ed_old_pass, ed_password, ed_repassword;
     Button btn_change;
     ThuThuDAO thuThuDAO;
