@@ -71,9 +71,11 @@ public class Fragment_LoaiSach extends Fragment {
                 }
                 AlertDialog.Builder builder = new AlertDialog.Builder(mContext);
                 builder.setView(viewDialogAddLoaiSach);
+
                 EditText ed_name_loai_sach;
                 Button btn_add_loai_sach, btn_cancel_add_loai_sach;
                 TextInputLayout layout_ed_name_loai_sach;
+
                 layout_ed_name_loai_sach = viewDialogAddLoaiSach.findViewById(R.id.input_name_loai_sach);
                 ed_name_loai_sach = viewDialogAddLoaiSach.findViewById(R.id.ed_name_loai_sach);
                 btn_add_loai_sach = viewDialogAddLoaiSach.findViewById(R.id.btn_dialog_add_loai_sach);
@@ -109,10 +111,12 @@ public class Fragment_LoaiSach extends Fragment {
                             LoaiSach loaiSach = new LoaiSach();
                             loaiSach.tenloai = ed_name_loai_sach.getText().toString();
                             loaiSachDAO.insertLoaiSach(loaiSach);
+                            
                             arrLoaiSach = new ArrayList<>();
                             arrLoaiSach = (ArrayList<LoaiSach>) loaiSachDAO.getAllLoaiSach();
                             loaiSachAdapter = new LoaiSachAdapter(mContext, arrLoaiSach);
                             rcyLoaiSach.setAdapter(loaiSachAdapter);
+
                             alertDialog.dismiss();
                             Snackbar.make(view, "Thêm loại sách thành công!", Snackbar.LENGTH_LONG)
                                     .setBackgroundTint(ContextCompat.getColor(getActivity(), R.color.primary_color))
