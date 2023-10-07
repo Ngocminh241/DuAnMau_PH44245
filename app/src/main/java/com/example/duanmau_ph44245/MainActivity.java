@@ -82,7 +82,7 @@ public class MainActivity extends AppCompatActivity {
         thuThuDAO = new ThuThuDAO(this);
         ThuThu thuThu = thuThuDAO.getIdTT(user);
         String username = thuThu.hoTen;
-        tvUsername.setText("Welcome " + username + "!");
+        tvUsername.setText(username);
 
         if (!user.equalsIgnoreCase("admin")) {
             navigationView.getMenu().findItem(R.id.nav_them_nguoi_dung).setVisible(false);
