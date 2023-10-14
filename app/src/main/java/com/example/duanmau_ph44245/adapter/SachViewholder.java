@@ -10,12 +10,13 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.duanmau_ph44245.R;
 
 public class SachViewholder extends RecyclerView.ViewHolder {
-    TextView tv_name_sach, tv_gia_thue, tv_loai_sach;
+    TextView tv_name_sach, tv_gia_thue, tv_loai_sach, tv_nam_xb;
     ImageView img_delete_sach;
     View item_sach;
     public SachViewholder(@NonNull View itemView) {
         super(itemView);
         tv_name_sach = itemView.findViewById(R.id.tv_name_sach_frag_sach);
+        tv_nam_xb = itemView.findViewById(R.id.tv_nam_xuat_ban_frag_sach);
         tv_gia_thue = itemView.findViewById(R.id.tv_gia_thue_sach_frag_sach);
         tv_loai_sach = itemView.findViewById(R.id.tv_name_loai_sach_frag_sach);
         img_delete_sach = itemView.findViewById(R.id.img_delete_sach);

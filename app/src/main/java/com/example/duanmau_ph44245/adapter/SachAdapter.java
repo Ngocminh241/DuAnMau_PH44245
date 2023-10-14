@@ -57,7 +57,7 @@ public class SachAdapter extends RecyclerView.Adapter<SachViewholder> {
     }
 
     @Override
-    public void onBindViewHolder(@NonNull SachViewholder holder, int position) {
+    public void onBindViewHolder(@NonNull SachViewholder holder, @SuppressLint("RecyclerView") int position) {
         sachDAO = new SachDAO(context);
         loaiSachDAO = new LoaiSachDAO(context);
         Sach sach = arrSach.get(position);
@@ -65,6 +65,7 @@ public class SachAdapter extends RecyclerView.Adapter<SachViewholder> {
             LoaiSachDAO loaiSachDAO = new LoaiSachDAO(context);
             LoaiSach loaiSach= loaiSachDAO.getIdLoaiSach(String.valueOf(sach.maLoai));
             holder.tv_name_sach.setText(sach.tenSach);
+            holder.tv_nam_xb.setText(sach.namXB + "");
             holder.tv_gia_thue.setText(sach.giaThue + " VND");
             holder.tv_loai_sach.setText(loaiSach.tenloai);
             inflater = LayoutInflater.from(context);
@@ -136,17 +137,20 @@ public class SachAdapter extends RecyclerView.Adapter<SachViewholder> {
                 AlertDialog.Builder builder = new AlertDialog.Builder(context);
                 builder.setView(viewUpdateSach);
 
-                EditText ed_update_name_sach, ed_update_gia_thue;
+                EditText ed_update_name_sach,ed_update_nam_xb, ed_update_gia_thue;
                 Button btn_update_sach, btn_cancel_update_sach;
-                TextInputLayout input_name_sach, input_price_sach;
+                TextInputLayout input_name_sach, input_nam_xb_sach, input_price_sach;
                 input_name_sach = viewUpdateSach.findViewById(R.id.input_name_sach_update);
+                input_nam_xb_sach = viewUpdateSach.findViewById(R.id.input_nam_xb_update);
                 input_price_sach = viewUpdateSach.findViewById(R.id.input_price_sach_update);
                 spinner_update_loai_sach = viewUpdateSach.findViewById(R.id.spn_update_sach_frag_sach);
                 ed_update_name_sach = viewUpdateSach.findViewById(R.id.ed_update_name_sach_frag_sach);
+                ed_update_nam_xb = viewUpdateSach.findViewById(R.id.ed_update_nam_xb_frag_sach);
                 ed_update_gia_thue = viewUpdateSach.findViewById(R.id.ed_update_gia_thue_sach_frag_sach);
                 btn_update_sach = viewUpdateSach.findViewById(R.id.btn_dialog_update_sach);
                 btn_cancel_update_sach = viewUpdateSach.findViewById(R.id.btn_dialog_cancle_update_sach);
                 input_name_sach.setError("");
+                input_nam_xb_sach.setError("");
                 input_price_sach.setError("");
                 AlertDialog alertDialog = builder.create();
                 alertDialog.show();
@@ -174,6 +178,7 @@ public class SachAdapter extends RecyclerView.Adapter<SachViewholder> {
                         spinner_update_loai_sach.setSelection(positionLoaiSach);
                     }
                 }
+                ed_update_nam_xb.setText(sach.namXB + "");
                 ed_update_gia_thue.setText(sach.giaThue + "");
                 ed_update_name_sach.setText(sach.tenSach);
 
@@ -194,6 +199,15 @@ public class SachAdapter extends RecyclerView.Adapter<SachViewholder> {
                         }else {
                             input_name_sach.setError("");
                         }
+                        if (ed_update_nam_xb.getText().toString().isEmpty()) {
+                            input_nam_xb_sach.setError("Năm xuất bản sách đang trống!");
+                            check = -1;
+                        }else if(ed_update_nam_xb.getText().length()<4 ||ed_update_nam_xb.getText().length()> 4) {
+                            input_nam_xb_sach.setError("Năm xuất bản sách không hợp lệ!");
+                            check = -1;
+                        }else {
+                            input_nam_xb_sach.setError("");
+                        }
                         if (ed_update_gia_thue.getText().toString().isEmpty()) {
                             input_price_sach.setError("Giá sách đang trống!");
                             check = -1;
@@ -208,6 +222,7 @@ public class SachAdapter extends RecyclerView.Adapter<SachViewholder> {
                            Sach sach1 = new Sach();
                            sach1.maSach = sach.maSach;
                            sach1.tenSach = ed_update_name_sach.getText().toString();
+                           sach1.namXB = Integer.parseInt(ed_update_nam_xb.getText().toString());
                            sach1.giaThue = Integer.parseInt(ed_update_gia_thue.getText().toString());
                            sach1.maLoai = maLoaiSach;
                            arrSach.set(position, sach1);
@@ -217,10 +232,12 @@ public class SachAdapter extends RecyclerView.Adapter<SachViewholder> {
                            Snackbar.make(viewAlert, "Sửa  sách thành công!", Snackbar.LENGTH_LONG)
                                    .setBackgroundTint(R.color.primary_color)
                                    .show();
+                           ed_update_nam_xb.setText("");
                            ed_update_gia_thue.setText("");
                            ed_update_name_sach.setText("");
                            input_name_sach.setError("");
                            input_price_sach.setError("");
+                           input_nam_xb_sach.setError("");
                        }
                     }
                 });

@@ -42,8 +42,27 @@
             android:id="@+id/ed_update_name_sach_frag_sach"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/white"
+            android:background="#ECECEC"
             />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:padding="8dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:errorEnabled="true"
+        android:hint="Năm xuất bản"
+        android:id="@+id/input_nam_xb_update"
+        app:endIconTint = "#0A239F"
+        app:hintTextColor = "#0A239F"
+        app:boxStrokeColor = "#0A239F"
+        android:textColorHint = "#0A239F">
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/ed_update_nam_xb_frag_sach"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#ECECEC"
+            android:inputType="number" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
@@ -61,7 +80,7 @@
             android:id="@+id/ed_update_gia_thue_sach_frag_sach"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/white"
+            android:background="#ECECEC"
             android:inputType="number" />
     </com.google.android.material.textfield.TextInputLayout>
     <LinearLayout

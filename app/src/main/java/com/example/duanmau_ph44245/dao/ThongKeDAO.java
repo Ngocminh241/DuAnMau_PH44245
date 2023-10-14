@@ -44,7 +44,7 @@ public class ThongKeDAO {
     //thong ke doanh thu
     @SuppressLint("Range")
     public int getDoanhThu(String tuNgay, String denNgay) {
-        String sqlDoanhThu = "SELECT SUM (tienThue) as doanhThu FROM phieumuon WHERE ngay BETWEEN ? AND ?";
+        String sqlDoanhThu = "SELECT SUM(tienThue) as doanhThu FROM phieumuon WHERE ngay BETWEEN ? AND ?";
         List <Integer> list = new ArrayList<>();
         Cursor cursor = sqLiteDatabase.rawQuery(sqlDoanhThu, new String[] {tuNgay, denNgay});
 

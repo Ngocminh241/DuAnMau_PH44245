@@ -28,7 +28,7 @@
             android:id="@+id/ed_name_tv"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/white"
+            android:background="#ECECEC"
             />
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -49,7 +49,7 @@
             android:id="@+id/ed_bith_date_tv"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/white"
+            android:background="#ECECEC"
             />
     </com.google.android.material.textfield.TextInputLayout>
     <LinearLayout

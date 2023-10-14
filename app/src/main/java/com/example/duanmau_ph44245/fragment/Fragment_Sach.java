@@ -82,21 +82,25 @@ public class Fragment_Sach extends Fragment {
                 }
                 AlertDialog.Builder builder = new AlertDialog.Builder(mContext);
                 builder.setView(viewDialogAddSach);
-                EditText ed_name_sach, ed_gia_thue;
+                EditText ed_name_sach, ed_nam_xb, ed_gia_thue;
                 Button btn_add_sach, btn_cancel_add_sach;
-                TextInputLayout input_name_sach, input_price_sach;
+                TextInputLayout input_name_sach, input_nam_xb_sach, input_price_sach;
                 input_name_sach = viewDialogAddSach.findViewById(R.id.input_name_sach);
+                input_nam_xb_sach = viewDialogAddSach.findViewById(R.id.input_nam_xb_sach);
                 input_price_sach = viewDialogAddSach.findViewById(R.id.input_price_sach);
                 spinner_loai_sach = viewDialogAddSach.findViewById(R.id.spn_sach);
                 ed_name_sach = viewDialogAddSach.findViewById(R.id.ed_name_sach);
+                ed_nam_xb = viewDialogAddSach.findViewById(R.id.ed_nam_xb_sach);
                 ed_gia_thue = viewDialogAddSach.findViewById(R.id.ed_gia_thue_sach);
                 btn_add_sach = viewDialogAddSach.findViewById(R.id.btn_dialog_add_sach);
                 btn_cancel_add_sach = viewDialogAddSach.findViewById(R.id.btn_dialog_cancle_add_sach);
 
                 ed_gia_thue.setText("");
+                ed_nam_xb.setText("");
                 ed_name_sach.setText("");
                 input_name_sach.setError("");
                 input_price_sach.setError("");
+                input_nam_xb_sach.setError("");
 
                 arrLoaiSach = (ArrayList<LoaiSach>) loaiSachDAO.getAllLoaiSach();
                 int check = 1;
@@ -152,10 +156,19 @@ public class Fragment_Sach extends Fragment {
                             }else {
                                 input_name_sach.setError("");
                             }
+                            if (ed_nam_xb.getText().toString().isEmpty()) {
+                                input_nam_xb_sach.setError("Năm xuất bản sách đang trống!");
+                                check = -1;
+                            }else if(ed_nam_xb.getText().length()<4 ||ed_nam_xb.getText().length()> 4) {
+                                input_nam_xb_sach.setError("Năm xuất bản sách không hợp lệ!");
+                                check = -1;
+                            }else {
+                                input_nam_xb_sach.setError("");
+                            }
                             if (ed_gia_thue.getText().toString().isEmpty()) {
                                 input_price_sach.setError("Giá sách đang trống!");
                                 check = -1;
-                            }else if(ed_gia_thue.getText().length()<4 ||ed_gia_thue.getText().length()> 6) {
+                            }else if(ed_gia_thue.getText().length()<4 ||ed_gia_thue.getText().length()> 16) {
                                 input_price_sach.setError("Giá sách không hợp lệ!");
                                 check = -1;
                             }else {
@@ -164,6 +177,7 @@ public class Fragment_Sach extends Fragment {
                             if(check > 0) {
                                 Sach sach = new Sach();
                                 sach.tenSach = ed_name_sach.getText().toString();
+                                sach.namXB = Integer.parseInt(ed_nam_xb.getText().toString());
                                 sach.giaThue = Integer.parseInt(ed_gia_thue.getText().toString());
                                 sach.maLoai = maLoaiSach;
                                 sachDAO.insertSach(sach);
@@ -175,9 +189,11 @@ public class Fragment_Sach extends Fragment {
                                 Snackbar.make(view, "Thêm sách thành công!", Snackbar.LENGTH_LONG)
                                         .setBackgroundTint(ContextCompat.getColor(getActivity(), R.color.primary_color))
                                         .show();
+                                ed_nam_xb.setText("");
                                 ed_gia_thue.setText("");
                                 ed_name_sach.setText("");
                                 input_name_sach.setError("");
+                                input_nam_xb_sach.setError("");
                                 input_price_sach.setError("");
                             }
                         }

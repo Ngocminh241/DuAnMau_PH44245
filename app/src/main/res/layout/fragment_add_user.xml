@@ -25,7 +25,7 @@
         <com.google.android.material.textfield.TextInputEditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/white"
+            android:background="#ECECEC"
             android:id="@+id/ed_username_add_user"
             />
 
@@ -43,7 +43,7 @@
         <com.google.android.material.textfield.TextInputEditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/white"
+            android:background="#ECECEC"
             android:id="@+id/ed_name_add_user"
             />
 
@@ -62,7 +62,7 @@
         <com.google.android.material.textfield.TextInputEditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/white"
+            android:background="#ECECEC"
             android:id="@+id/ed_password_add_user"
             />
 
@@ -81,7 +81,7 @@
         <com.google.android.material.textfield.TextInputEditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/white"
+            android:background="#ECECEC"
             android:id="@+id/ed_repassword_add_user"
             />
 

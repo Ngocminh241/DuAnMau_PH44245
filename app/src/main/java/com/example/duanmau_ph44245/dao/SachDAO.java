@@ -25,6 +25,7 @@ public class SachDAO {
     public long insertSach (Sach sach) {
         ContentValues values = new ContentValues();
         values.put("tenSach", sach.tenSach);
+        values.put("namXuatBan", sach.namXB);
         values.put("giaThue", sach.giaThue);
         values.put("maLoai", sach.maLoai);
 
@@ -34,6 +35,7 @@ public class SachDAO {
     public int updateSach (Sach sach) {
         ContentValues values = new ContentValues();
         values.put("tenSach", sach.tenSach);
+        values.put("namXuatBan", sach.namXB);
         values.put("giaThue", sach.giaThue);
         values.put("maLoai", sach.maLoai);
 
@@ -63,6 +65,7 @@ public class SachDAO {
             Sach sach = new Sach();
             sach.maSach = Integer.parseInt(cursor.getString(cursor.getColumnIndex("maSach")));
             sach.tenSach = cursor.getString(cursor.getColumnIndex("tenSach"));
+            sach.namXB = Integer.parseInt(cursor.getString(cursor.getColumnIndex("namXuatBan")));
             sach.giaThue = Integer.parseInt(cursor.getString(cursor.getColumnIndex("giaThue")));
             sach.maLoai = Integer.parseInt(cursor.getString(cursor.getColumnIndex("maLoai")));
             listSach.add(sach);
