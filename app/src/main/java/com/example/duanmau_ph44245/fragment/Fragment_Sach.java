@@ -7,12 +7,14 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.widget.SearchView;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -30,6 +32,8 @@ import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.textfield.TextInputLayout;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 
 public class Fragment_Sach extends Fragment {
     LayoutInflater inflater;
@@ -40,12 +44,19 @@ public class Fragment_Sach extends Fragment {
     ArrayList<Sach> arrSach = new ArrayList<>();
     ArrayList<LoaiSach> arrLoaiSach = new ArrayList<>();
     RecyclerView rcySach;
+    ArrayList<Sach> searchList;
     SachDAO sachDAO;
     LoaiSachDAO loaiSachDAO;
     SachAdapter sachAdapter;
     Spinner spinner_loai_sach;
     LoaiSachSpinnerAdapter loaiSachAdapter;
+    Spinner spnSapXep;
+
+    SearchView searchView;
     int maLoaiSach;
+    public Fragment_Sach(){
+
+    }
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -62,7 +73,9 @@ public class Fragment_Sach extends Fragment {
     public void onViewCreated(@NonNull  View view, @Nullable  Bundle savedInstanceState) {
         inflater = getLayoutInflater();
         floatingActionButton = view.findViewById(R.id.float_btn_add_sach);
+        spnSapXep = view.findViewById(R.id.spnSapXep);
         viewDialogAddSach = inflater.inflate(R.layout.dialog_add_sach, null);
+        searchView = view.findViewById(R.id.searchView);
 
         rcySach= view.findViewById(R.id.rcv_sach);
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(mContext);
@@ -73,7 +86,7 @@ public class Fragment_Sach extends Fragment {
         arrSach = (ArrayList<Sach>) sachDAO.getAllSach();
         sachAdapter = new SachAdapter(mContext, arrSach);
         rcySach.setAdapter(sachAdapter);
-
+        //
         floatingActionButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -201,6 +214,153 @@ public class Fragment_Sach extends Fragment {
                 }
             }
         });
+        //
+        ArrayList<String> sapXepArr = new ArrayList<>();
+        sapXepArr.add("-- Mặc định --");
+        sapXepArr.add("Giá tăng dần");
+        sapXepArr.add("Giá giảm dần");
+        sapXepArr.add("Năm xuất bản");
+        ArrayAdapter<String> adapterSX = new ArrayAdapter<>(getContext(), android.R.layout.simple_spinner_dropdown_item, sapXepArr);
+        spnSapXep.setAdapter(adapterSX);
+        spnSapXep.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                if (position == 0) {
+                    arrSach = (ArrayList<Sach>) sachDAO.getAllSach();
+                    sachAdapter = new SachAdapter(getContext(), arrSach);
+                    rcySach.setAdapter(sachAdapter);
+                } else if (position == 1) {
+                    sapXepTang();
+                } else if (position == 2) {
+                    sapXepGiam();
+                } else if (position == 3) {
+                    sapXepNam();
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+        //
+        //
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                searchList = new ArrayList<>();
+                if (query.length() > 0) {
+                    for(int i = 0; i < arrSach.size(); i++) {
+                        if(arrSach.get(i).tenSach.toUpperCase().contains(query.toUpperCase())) {
+                            Sach s = new Sach();
+                            s.setMaSach(arrSach.get(i).getMaSach());
+                            s.setTenSach(arrSach.get(i).getTenSach());
+                            s.setGiaThue(arrSach.get(i).getGiaThue());
+                            s.setTenLoai(arrSach.get(i).getTenLoai());
+                            searchList.add(s);
+                        }
+                    }
+                    LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
+                    rcySach.setLayoutManager(linearLayoutManager);
+                    sachAdapter = new SachAdapter(getContext(), searchList);
+                    rcySach.setAdapter(sachAdapter);
+                    sachAdapter.notifyDataSetChanged();
+                } else {
+                    LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
+                    rcySach.setLayoutManager(linearLayoutManager);
+                    sachAdapter = new SachAdapter(getContext(), arrSach);
+                    rcySach.setAdapter(sachAdapter);
+                    sachAdapter.notifyDataSetChanged();
+                }
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                searchList = new ArrayList<>();
+                if (newText.length() > 0) {
+                    for(int i = 0; i < arrSach.size(); i++) {
+                        if(arrSach.get(i).getTenSach().toUpperCase().contains(newText.toUpperCase())) {
+                            Sach s = new Sach();
+                            s.setMaSach(arrSach.get(i).getMaSach());
+                            s.setTenSach(arrSach.get(i).getTenSach());
+                            s.setGiaThue(arrSach.get(i).getGiaThue());
+                            s.setTenLoai(arrSach.get(i).getTenLoai());
+                            searchList.add(s);
+                        }
+                    }
+                    LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
+                    rcySach.setLayoutManager(linearLayoutManager);
+                    sachAdapter = new SachAdapter(getContext(), searchList);
+                    rcySach.setAdapter(sachAdapter);
+                    sachAdapter.notifyDataSetChanged();
+                } else {
+                    LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
+                    rcySach.setLayoutManager(linearLayoutManager);
+                    sachAdapter = new SachAdapter(getContext(), arrSach);
+                    rcySach.setAdapter(sachAdapter);
+                    sachAdapter.notifyDataSetChanged();
+                }
+                return false;
+            }
+        });
     }
+    public void sapXepTang() {
+        Collections.sort(arrSach, new Comparator<Sach>() {
+            @Override
+            public int compare(Sach o1, Sach o2) {
+                if (o1.getGiaThue() > o2.getGiaThue()) {
+                    return 1;
+                } else {
+                    if (o1.getGiaThue() == o2.getGiaThue()) {
+                        return 0;
+                    } else {
+                        return -1;
+                    }
+                }
+            }
+        });
+        sachAdapter = new SachAdapter(getContext(), arrSach);
+        rcySach.setAdapter(sachAdapter);
+    }
+    public void sapXepGiam() {
+        Collections.sort(arrSach, new Comparator<Sach>() {
+            @Override
+            public int compare(Sach o1, Sach o2) {
+                if (o1.getGiaThue() > o2.getGiaThue()) {
+                    return -1;
+                } else {
+                    if (o1.getGiaThue() == o2.getGiaThue()) {
+                        return 0;
+                    } else {
+                        return 1;
+                    }
+                }
+            }
+        });
+        sachAdapter = new SachAdapter(getContext(), arrSach);
+        rcySach.setAdapter(sachAdapter);
+    }
+    public void sapXepNam() {
+        Collections.sort(arrSach, new Comparator<Sach>() {
+            @Override
+            public int compare(Sach o1, Sach o2) {
+                if (o1.getNamXB() > o2.getNamXB()) {
+                    return 1;
+                } else {
+                    if (o1.getNamXB() == o2.getNamXB()) {
+                        return 0;
+                    } else {
+                        return -1;
+                    }
+                }
+            }
+        });
+        sachAdapter = new SachAdapter(getContext(), arrSach);
+        rcySach.setAdapter(sachAdapter);
+    }
+
+
 }
+
 

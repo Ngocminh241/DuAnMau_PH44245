@@ -1,9 +1,12 @@
 package com.example.duanmau_ph44245.dao;
 
+import static android.service.controls.ControlsProviderService.TAG;
+
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.util.Log;
 
 import com.example.duanmau_ph44245.database.DBHelper;
 import com.example.duanmau_ph44245.model.LoaiSach;
@@ -14,8 +17,10 @@ import java.util.List;
 public class LoaiSachDAO {
     SQLiteDatabase sqLiteDatabase;
     Context context;
+    private  DBHelper dbHelper;
 
     public static  final  String TABLE_NAME_LOAI_SACH = DBHelper.TABLE_NAME_LOAI_SACH;
+
     public LoaiSachDAO(Context context) {
         DBHelper dbHelper = new DBHelper(context);
         sqLiteDatabase = dbHelper.getWritableDatabase();
@@ -63,5 +68,21 @@ public class LoaiSachDAO {
         }
         return listLoaiSach;
     }
-
+    int row;
+    public int getMaLoai(String tenLoai) {
+        SQLiteDatabase db = dbHelper.getReadableDatabase();
+        try {
+            Cursor cursor = db.rawQuery("SELECT maLoai FROM tb_LoaiSach WHERE tb_LoaiSach.tenLoai = ?", new String[] {tenLoai});
+            if (cursor.getCount() > 0) {
+                cursor.moveToFirst();
+                while (!cursor.isAfterLast()) {
+                    row = cursor.getInt(0);
+                    cursor.moveToNext();
+                }
+            }
+        } catch (Exception e) {
+            Log.i(TAG, "Lỗi" + e);
+        }
+        return row;
+    }
 }

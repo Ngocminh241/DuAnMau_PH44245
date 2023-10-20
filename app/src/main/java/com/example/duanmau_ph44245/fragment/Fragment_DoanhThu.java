@@ -93,8 +93,6 @@ public class Fragment_DoanhThu extends Fragment {
                 d.show();
             }
         });
-
-
     }
     public void bt_DT(){
         btn_doanh_thu.setOnClickListener(new View.OnClickListener() {

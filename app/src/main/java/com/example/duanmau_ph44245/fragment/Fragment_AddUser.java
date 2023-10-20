@@ -182,5 +182,6 @@ public class Fragment_AddUser extends Fragment {
             }
         });
         super.onViewCreated(view, savedInstanceState);
+
     }
 }

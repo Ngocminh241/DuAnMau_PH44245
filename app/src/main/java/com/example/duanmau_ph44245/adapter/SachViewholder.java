@@ -2,9 +2,11 @@ package com.example.duanmau_ph44245.adapter;
 
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.Spinner;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.widget.SearchView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.duanmau_ph44245.R;
@@ -21,6 +23,7 @@ public class SachViewholder extends RecyclerView.ViewHolder {
         tv_loai_sach = itemView.findViewById(R.id.tv_name_loai_sach_frag_sach);
         img_delete_sach = itemView.findViewById(R.id.img_delete_sach);
         item_sach = itemView.findViewById(R.id.item_sach_frag_sach);
+
     }
 }
 
